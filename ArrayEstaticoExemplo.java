@@ -1,7 +1,10 @@
+import javax.swing.JOptionPane;
 public class ArrayEstaticoExemplo {
     
-}
+
     public static void main(String[] args) {
+      int   valorUser = Integer.parseInt(JOptionPane.showInputDialog("Insera seu numero na posiçao " ));
+
         // 1) DECLARACAO: cria a variavel que vai apontar para um array de int.
         int[] numeros;
 
@@ -14,10 +17,24 @@ public class ArrayEstaticoExemplo {
         // 3) TAMANHO TOTAL (capacidade fixa) do array.
         System.out.println("Capacidade do array: " + numeros.length);
 
+
+
         // 4) INSERIR NO FIM (simples).
         tamanho = inserirNoFim(numeros, tamanho, 10);
         tamanho = inserirNoFim(numeros, tamanho, 20);
         tamanho = inserirNoFim(numeros, tamanho, 30);
+        inserirUsuario(numeros, tamanho, tamanho);
+        
+        
+        
+        
+        //Inserir no for
+        
+        
+
+
+
+
         exibirComIndice(numeros, tamanho);
 
         // 4) INSERIR EM POSICAO (precisa deslocar para a direita).
@@ -37,7 +54,7 @@ public class ArrayEstaticoExemplo {
 
         // ---- 3 formas de exibir ----
         exibirComIndice(numeros, tamanho); // mostra indice + valor
-        exibirForEach(numeros, tamanho);   // mostra so o valor (for-each)
+       // exibirForEach(numeros, tamanho);   // mostra so o valor (for-each)
         exibirWhile(numeros, tamanho);     // mostra so o valor (while)
     }
 
@@ -51,19 +68,42 @@ public class ArrayEstaticoExemplo {
      * @param valor valor a inserir
      * @return novo tamanho apos a insercao; se estiver cheio, retorna o mesmo tamanho
      */
+    
     public static int inserirNoFim(int[] array, int tamanho, int valor) {
-        // Verifica se ha espaco disponivel.
-        if (tamanho >= array.length) {
-            System.out.println("Array cheio. Nao foi possivel inserir " + valor);
-            return tamanho;
-        }
+        //verifica se o valor é maior que 0
+       if (valor<0) {
+        System.out.println("ERROR");
+        System.out.println("NUMERO NEGATIVO!!!!!");
+        return valor;
+       } else {
+       estaCheio(array,tamanho);
 
         // Escreve o valor na primeira posicao livre (que e 'tamanho').
         array[tamanho] = valor;
 
         // Retorna o novo tamanho aumentado em 1.
         return tamanho + 1;
+       }
     }
+    public static int inserirUsuario(int[] array, int tamanho, int valorUser) {
+
+        valorUser = Integer.parseInt(JOptionPane.showInputDialog("Insera seu numero na posiçao "+ tamanho ));
+        //verifica se o valor é maior que 0
+       if (valorUser<0) {
+        System.out.println("ERROR");
+        System.out.println("NUMERO NEGATIVO!!!!!");
+        return valorUser;
+       } else {
+       estaCheio(array,tamanho);
+
+        // Escreve o valor na primeira posicao livre (que e 'tamanho').
+        array[tamanho] = valorUser;
+
+        // Retorna o novo tamanho aumentado em 1.
+        return tamanho + 1;
+       }
+    }
+
 
     /**
      * Insere um valor em um indice especifico, deslocando os elementos a direita.
@@ -78,8 +118,8 @@ public class ArrayEstaticoExemplo {
      */
     public static int inserirEmPosicao(int[] array, int tamanho, int indice, int valor) {
         if (tamanho >= array.length) {
-            System.out.println("Array cheio. Nao foi possivel inserir " + valor);
-            return tamanho;
+          //  System.out.println("Array cheio. Nao foi possivel inserir " + valor);
+            return estaCheio(array, tamanho);
         }
         if (indice < 0 || indice > tamanho) {
             System.out.println("Indice invalido para insercao: " + indice);
@@ -93,6 +133,19 @@ public class ArrayEstaticoExemplo {
         array[indice] = valor;
         return tamanho + 1;
     }
+
+    public static int estaCheio(int[]array, int tamanho){
+        if (tamanho >= array.length) {
+            System.out.println("Array cheio. Nao foi possivel inserir " );
+            
+            return tamanho;
+
+        } return tamanho;
+        
+
+    
+    }
+    
 
     /**
      * Remove o elemento de um indice especifico, deslocando os elementos a esquerda.
@@ -196,3 +249,4 @@ public class ArrayEstaticoExemplo {
             i++;                    // avanca para o proximo
         }
     }
+}
